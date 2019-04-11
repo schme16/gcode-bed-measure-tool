@@ -1,0 +1,20 @@
+.player-col-1, .player-col-2 {
+    width: 100% !important;
+    display: block;
+    margin-right: 0;
+    border-right: none;
+}
+
+.page.page-podcast {
+    margin: 0;
+    width: unset;
+    padding: 0;
+    left: 0;
+    right: 0;
+    max-width: unset;
+}
+
+.time-remaining {
+    right: 0px;
+    left: unset;
+}

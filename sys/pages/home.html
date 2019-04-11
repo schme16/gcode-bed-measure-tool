@@ -1,0 +1,10 @@
+<form class="add-podcast" method="GET" action="/api/users/add-podcast" ng-submit="$event.preventDefault(); addFeed(feed); feed = null">
+	<input type="text" name="feed" ng-model="feed">
+</form>
+
+<button ng-click="refreshAllPodcasts()">Refresh all</button>
+<div class="podcast-list">
+	<a ng-href="#{{encodeURIComponent(pod.feed)}}|" class="podcast-item" ng-repeat="pod in podcasts track by $index" ng-click="$root.podcast = pod; setPage('podcast')" ng-style="{'background-image': 'url(' + (images[md5(pod.image)] || pod.image) + ')'}">
+		<div class="podcast-item-title">{{pod.title}}</div>
+	</a>
+</div>
