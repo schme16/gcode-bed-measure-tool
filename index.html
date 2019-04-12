@@ -49,10 +49,23 @@
 
 </head>
 <body ng-controller="master" ng-cloak>
+	<div class="connection-details">
+		<label>Port: <select ng-options="a as a.comName for a in ports" ng-model="port" ng-disabled="!!conn"></select></label>
+		<label>Speed: <select ng-options="a as a for a in speeds" ng-model="speed" ng-disabled="!!conn"></select></label>
+		<button ng-show="conn" ng-click="conn.close()">Disconnect</button>
+		<button ng-show="!conn" ng-disabled="!port || !speed" ng-click="connect(port, speed)">Connect</button>
+	</div>
+	<form class="custom-gcode" action="/" method="get" ng-submit="$event.preventDefault(); sendCommand(code)">
+		<input ng-model="code">
+	</form>
 
+	<div class="bed-measurement-tools">
+		<label>Bed width: <input ng-model="bed.width" type="number"></label><br>
+		<label>Bed height: <input ng-model="bed.height" type="number"></label><br>
+		<label>Number of X points: <input ng-model="bed.pointsX" type="number"></label><br>
+		<label>Number of Y points: <input ng-model="bed.pointsY" type="number"></label><br>
+		<button ng-disabled="!conn" ng-click="runBedMeasurement(bed)">Run</button>
+	</div>
 
-
-
-	<!--Initialize the app-->
 </body>
 </html>

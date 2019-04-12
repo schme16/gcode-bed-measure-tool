@@ -4,6 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
+    "install": "electron-rebuild",
     "start": "electron ."
   },
   "repository": {
@@ -17,9 +18,10 @@
   },
   "homepage": "https://github.com/schme16/gcode-bed-measure-tool#readme",
   "dependencies": {
-    "remote": "^0.2.6"
+    "serialport": "^7.1.4"
   },
   "devDependencies": {
-    "electron": "latest"
+    "electron": "latest",
+    "electron-rebuild": "^1.8.4"
   }
 }
