@@ -21,23 +21,11 @@
 
 
 	<!--Scripts-->
-		<script>
-			// window.nodeRequire = require;
-			// delete window.require;
-			// delete window.exports;
-			// delete window.module;
-		</script>	
 		<script src="sys/js/jquery.min.js"></script>
 		<script src="sys/js/angular.min.js"></script>
+		<script src="sys/js/plotly-latest.min.js"></script>
  		<script src="sys/js/main.js"></script>
-		<script src="sys/js/nedb.min.js"></script>
-		<script src="sys/js/sugar.min.js"></script>
 
-
-    <script>
-      // You can also require other files to run in this process
-      //require('./renderer.js')
-    </script>
 
 	<!--The title-->
 		<title>gcode Bed Measurement Tool</title>
@@ -49,22 +37,44 @@
 
 </head>
 <body ng-controller="master" ng-cloak>
-	<div class="connection-details">
-		<label>Port: <select ng-options="a as a.comName for a in ports" ng-model="port" ng-disabled="!!conn"></select></label>
-		<label>Speed: <select ng-options="a as a for a in speeds" ng-model="speed" ng-disabled="!!conn"></select></label>
-		<button ng-show="conn" ng-click="conn.close()">Disconnect</button>
-		<button ng-show="!conn" ng-disabled="!port || !speed" ng-click="connect(port, speed)">Connect</button>
-	</div>
-	<form class="custom-gcode" action="/" method="get" ng-submit="$event.preventDefault(); sendCommand(code)">
-		<input ng-model="code">
-	</form>
+	<div class="left-content">
 
-	<div class="bed-measurement-tools">
-		<label>Bed width: <input ng-model="bed.width" type="number"></label><br>
-		<label>Bed height: <input ng-model="bed.height" type="number"></label><br>
-		<label>Number of X points: <input ng-model="bed.pointsX" type="number"></label><br>
-		<label>Number of Y points: <input ng-model="bed.pointsY" type="number"></label><br>
-		<button ng-disabled="!conn" ng-click="runBedMeasurement(bed)">Run</button>
+		<div class="connection-details">
+			<label>Port: <select ng-options="a as a.comName for a in ports" ng-model="port" ng-disabled="!!conn"></select></label>
+			<label>Speed: <select ng-options="a as a for a in speeds" ng-model="speed" ng-disabled="!!conn"></select></label>
+			<button ng-show="conn" ng-click="connect(null,null, true)">Disconnect</button>
+			<button ng-show="!conn" ng-disabled="!port || !speed" ng-click="connect(port, speed)">Connect</button>
+		</div>
+		
+		<br>
+
+		<form ng-disabled="!conn" class="custom-gcode" action="/" method="get" ng-submit="$event.preventDefault(); sendCommand(code)">
+			<label>GCODE: <input ng-disabled="!conn" ng-model="code"></label> <button ng-disabled="!conn" type="submit">Send</button>
+		</form>
+		
+		<br>
+
+		<div ng-disabled="!conn" class="bed-measurement-tools">
+			<label>Bed width: <input ng-disabled="!conn" ng-model="bed.width" type="number"></label><br>
+			<label>Bed height: <input ng-disabled="!conn" ng-model="bed.height" type="number"></label><br>
+			<label>Padding from edge of bed: <input ng-disabled="!conn" ng-model="bed.padding" type="number"></label><br>
+			<label>Number of X/Y points: <input ng-disabled="!conn" ng-model="bed.points" min="3" step="2" type="number"></label><br>
+			<!-- <label>Number of X points: <input ng-model="bed.pointsX" min="3" step="2" type="number"></label><br> -->
+			<!-- <label>Number of Y points: <input ng-model="bed.pointsY" min="3" step="2" type="number"></label><br> -->
+			<button ng-disabled="!conn" ng-click="runBedMeasurement(bed)">Run</button>
+			<button ng-disabled="!conn" ng-click="probePoints = []">Cancel</button>
+		</div>
+		<br>
+		<br>
+		<br>
+		<button ng-click="loadBedMap()">Load Bed map</button>
+		<button ng-disabled="!bedMap" ng-click="saveBedMap()">Save Bed map</button>
+	</div>
+
+
+
+	<div class="right-content">
+		<div id="heatmap"></div>
 	</div>
 
 </body>
