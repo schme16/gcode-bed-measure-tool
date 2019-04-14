@@ -2,6 +2,10 @@
 This tool was written in response to the [amazing tool]([https://github.com/npiegdon/bed-inspector](https://github.com/npiegdon/bed-inspector)) written by @[npiegdon](https://github.com/npiegdon), so honestly credit goes to him.
 
 
+
+
+
+
 # Installation
 ## Precompiled
 Check out the [Releases](https://github.com/schme16/gcode-bed-measure-tool/releases) page for the precompiled binaries.
@@ -28,5 +32,5 @@ You may also need to run `npm i` then `sudo npm run electron-rebuild` to finaliz
 
 Once installed, you can run it by running `npm start` in the folder.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyODA1MzQyMzddfQ==
+eyJoaXN0b3J5IjpbLTc5MzcyNTA3N119
 -->
