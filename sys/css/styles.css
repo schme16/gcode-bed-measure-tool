@@ -40,3 +40,17 @@ body{
 [disabled] {
     opacity: 0.6;
 }
+
+div#heatmap {
+    height: 740px;
+}
+
+progress {
+    width: 320px;
+    height: 20px;
+}
+
+.progress-text {
+    font-size: 30px;
+    text-align: center;
+}

@@ -1,12 +1,42 @@
 {
   "name": "gcode-bed-measure-tool",
-  "version": "1.0.0",
+  "version": "0.8.5",
   "description": "",
   "main": "main.js",
   "scripts": {
+    "postinstall": "electron-builder install-app-deps",
     "install": "electron-rebuild",
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "build --dir",
+    "dist": "build"
   },
+ "build": {
+    "appId": "com.schme16.gcodebedmeasuretool",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "NSIS",
+      "icon": "build/icon.ico"
+    }
+  },  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/schme16/gcode-bed-measure-tool.git"
@@ -23,6 +53,7 @@
   },
   "devDependencies": {
     "electron": "latest",
+    "electron-builder": "^20.39.0",
     "electron-rebuild": "^1.8.4"
   }
 }

@@ -18,12 +18,11 @@ angular.module('bed-measurement-tool', [])
 
 	m.mode = 'normal'
 	
-
 	m.currentProbePoint = false
 
 	m.probePoints = []
 
-	m.speed = localStorage.getItem('baud') != 'undefined' ? parseInt(localStorage.getItem('baud')) : 256000
+	m.speed = localStorage.getItem('baud') != 'undefined' ? parseInt(localStorage.getItem('baud')) : 250000
 
 	m.bed = localStorage.getItem('bed') != 'undefined' ? JSON.parse(localStorage.getItem('bed')) : {}
 
@@ -130,7 +129,8 @@ angular.module('bed-measurement-tool', [])
 			height = (bed.height - (padding*2)),
 			xChunk = width / (bed.points-1),
 			yChunk = height / (bed.points -1)
-			m.bedMap = {}
+			m.bedMap = {},
+			count = 1
 
 		for (var y = 0; y <= height; y = y + yChunk) {
 			for (var x = 0; x <= width; x = x + xChunk) {
@@ -142,13 +142,16 @@ angular.module('bed-measurement-tool', [])
 						height: height,
 						xChunk: xChunk,
 						yChunk: yChunk,
-						padding: padding
+						padding: padding,
+						index: count,
+						total: bed.points*bed.points
 					},
 					x: x,
 					y: y,
 					mapping: true,
 					passes: passes || 1
 				})
+				count++
 			}
 		}
 
@@ -161,14 +164,19 @@ angular.module('bed-measurement-tool', [])
 	}
 
 	m.processBedMeasurementCommands = () => {
+		m.mode = 'mapping'
 		m.currentProbePoint = m.probePoints.shift()
-
+		m.$applyAsync()
 		if (m.currentProbePoint) {
-			if (m.currentProbePoint.mapping) console.log('Probing point: X', m.currentProbePoint.x, 'Y', m.currentProbePoint.y)
+			if (m.currentProbePoint.command == 'M82') console.log('Switching to absolute positioning')
+			if (m.currentProbePoint.command == 'G28') console.log('Homing')
+			if (m.currentProbePoint.mapping) console.log('Probe',m.currentProbePoint.mappingDetails.index + '/' + m.currentProbePoint.mappingDetails.total , 'point: X', m.currentProbePoint.x + m.currentProbePoint.mappingDetails.padding, 'Y', m.currentProbePoint.y + m.currentProbePoint.mappingDetails.padding)
 			m.sendCommand(m.currentProbePoint.command)
 		}
 		else {
 			m.makeHeatmap(m.bedMap)
+			console.log('Total time probing:', )
+			m.mode = 'normal'
 		}
 	}
 

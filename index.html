@@ -54,16 +54,22 @@
 		
 		<br>
 
-		<div ng-disabled="!conn" class="bed-measurement-tools">
-			<label>Bed width: <input ng-disabled="!conn" ng-model="bed.width" type="number"></label><br>
-			<label>Bed height: <input ng-disabled="!conn" ng-model="bed.height" type="number"></label><br>
-			<label>Padding from edge of bed: <input ng-disabled="!conn" ng-model="bed.padding" type="number"></label><br>
-			<label>Number of X/Y points: <input ng-disabled="!conn" ng-model="bed.points" min="3" step="2" type="number"></label><br>
+		<div ng-disabled="!conn || mode == 'mapping'" class="bed-measurement-tools">
+			<label>Bed width: <input ng-disabled="!conn || mode == 'mapping'" ng-model="bed.width" type="number"></label><br>
+			<label>Bed height: <input ng-disabled="!conn || mode == 'mapping'" ng-model="bed.height" type="number"></label><br>
+			<label>Padding from edge of bed: <input ng-disabled="!conn || mode == 'mapping'" ng-model="bed.padding" type="number"></label><br>
+			<label>Number of X/Y points: <input ng-disabled="!conn || mode == 'mapping'" ng-model="bed.points" min="3" step="2" type="number"></label><br>
 			<!-- <label>Number of X points: <input ng-model="bed.pointsX" min="3" step="2" type="number"></label><br> -->
 			<!-- <label>Number of Y points: <input ng-model="bed.pointsY" min="3" step="2" type="number"></label><br> -->
-			<button ng-disabled="!conn" ng-click="runBedMeasurement(bed)">Run</button>
+			<button ng-disabled="!conn || mode == 'mapping'" ng-click="runBedMeasurement(bed)">Run</button>
 			<button ng-disabled="!conn" ng-click="probePoints = []">Cancel</button>
 		</div>
+		<br>
+		
+		<progress ng-show="mode == 'mapping' && currentProbePoint.mappingDetails.total" min="0" max="{{currentProbePoint.mappingDetails.total}}" value="{{currentProbePoint.mappingDetails.index}}"></progress>
+		<div ng-show="mode == 'mapping' && currentProbePoint.mappingDetails.total" class="progress-text">Probing position {{currentProbePoint.mappingDetails.index}} of {{currentProbePoint.mappingDetails.total}} - X:{{currentProbePoint.x + currentProbePoint.mappingDetails.padding}} Y: {{currentProbePoint.y +  + currentProbePoint.mappingDetails.padding}}</div>
+		
+		<div ng-show="mode == 'mapping' && !currentProbePoint.mappingDetails.total" class="pre-mapping-text">Setting abosulute positioning, and homing machine</div>
 		<br>
 		<br>
 		<br>
