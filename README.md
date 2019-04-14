@@ -2,7 +2,7 @@
 This tool was written in response to the [amazing tool]([https://github.com/npiegdon/bed-inspector](https://github.com/npiegdon/bed-inspector)) written by @[npiegdon](https://github.com/npiegdon), so honestly credit goes to him.
 
 
-![enter image description here](https://i.imgur.com/6g4ByQ2.png)
+![Results from a 21x21 (441 total) probing](https://i.imgur.com/6g4ByQ2.png)
 
 
 
@@ -32,5 +32,5 @@ You may also need to run `npm i` then `sudo npm run electron-rebuild` to finaliz
 
 Once installed, you can run it by running `npm start` in the folder.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTE2OTM5OTI0LC03OTM3MjUwNzddfQ==
+eyJoaXN0b3J5IjpbNDI0MDQ4MDksLTc5MzcyNTA3N119
 -->
