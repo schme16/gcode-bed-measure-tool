@@ -35,7 +35,7 @@ Enter the directory and run `npm i` to install all the prerequisites
 *Note: you may need to run this as sudo/admin, depending on your setup.
 You may also need to run `npm i` then `sudo npm run electron-rebuild` to finalize the install.
 
-Once installed, you can run it by running `npm start` in the folder.
+Once installed, you can run it by running `npm start` in the git repo folder.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NjY1NzUzNDAsLTc5MzcyNTA3N119
+eyJoaXN0b3J5IjpbLTc5OTM3MTI5NiwtNzkzNzI1MDc3XX0=
 -->
