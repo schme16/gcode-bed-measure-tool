@@ -24,4 +24,9 @@ Note: you may need to install: [windows build-tools]([https://www.npmjs.com/pack
 
 Enter the directory and run `npm i` to install all the prerequisites
 *Note: you may need to run this as sudo/admin, depending on your setup.
-You may also need to run `npm i` then `sudo npm run electron-rebuild` to finilize the install.
+You may also need to run `npm i` then `sudo npm run electron-rebuild` to finalize the install.
+
+Once installed, you can run it by running `npm start` in the folder.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTEyODA1MzQyMzddfQ==
+-->
